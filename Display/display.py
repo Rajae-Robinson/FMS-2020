@@ -1,5 +1,5 @@
 import pygame
-pygame.font.init()
+pygame.init()
 
 # Setting height and width of screen
 HEIGHT = 600
@@ -29,13 +29,23 @@ class Display:
         # Displaying background to fit screen
         self.win.blit(pygame.transform.scale(image, (WIDTH, HEIGHT)), (0, 0))
 
-    # display text to screen
+    
     def display_text(self, text, font, position):
+        """
+            display text to screen
+        """
         msg = font.render(text, 1, WHITE)
         text_rect = msg.get_rect()
         text_rect.topleft = position
         self.win.blit(msg, text_rect)
         return (text, text_rect)
+
+    
+    def draw_image(self, image, position):
+        """
+            draw images to screen
+        """
+        self.win.blit(image, position)
 
     """
     # game commentary function displays text then sleeps
@@ -59,7 +69,4 @@ class Display:
         # time given to read commentary
         sleep(2)
 
-    # draw images to screen
-    def draw_image(self, surface, image, position):
-        surface.blit(image, position)
     """

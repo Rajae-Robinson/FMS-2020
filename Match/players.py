@@ -1,4 +1,4 @@
-class Players(Teams):
+class Players():
     all_teams = ["REAL MADRID", "BARCELONA", "ATLETICO MADRID", "SEVILLA", "VALENCIA", "GETAFE",
                 "BAYERN MUNICH", "DORTMUND", "RP LIEPZIG", "LEVERKUSEN", "WOLFSBURG", "FRANKFURT",
                  "MAN. CITY", "LIVERPOOL", "CHELSEA", "TOTTENHAM", "ARSENAL", "MAN. UNITED",
@@ -161,14 +161,18 @@ class Players(Teams):
     home_goals = 0
     away_goals = 0
 
-    """
-        selects the team lineups for both home and way
-        selects the attacking team, opposing team, player with ball, defender, and gk
-    """
+    def __init__(self, home, away):
+      self.home = home
+      self.away = away
+
     @classmethod
     def select_random(cls):
-        cls.home_team = cls.teams_dict[home]
-        cls.away_team = cls.teams_dict[away]
+        """
+        selects the team lineups for both home and way
+        selects the attacking team, opposing team, player with ball, defender, and gk
+        """
+        cls.home_team = cls.teams_dict[self.home]
+        cls.away_team = cls.teams_dict[self.away]
         teams = [cls.home_team, cls.away_team]
 
         # selecting attacking team at random

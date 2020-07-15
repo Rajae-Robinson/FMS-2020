@@ -6,6 +6,8 @@ import random
 from Menus.button import Button
 from Display.display import Display
 from Menus.select_team import SelectTeam
+#from Match.players import Players
+#from Match.match import Chances, Fouls
 
 # Initializing
 pygame.init()
@@ -16,9 +18,6 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 # Setting display caption
 pygame.display.set_caption("SMS 2020")
 
-# game vars and other vars
-home = ""
-away = ""
 # player who recieved yellow
 yellow = []
 # Vars to position text
@@ -35,16 +34,12 @@ class Game():
     def __init__(self):
         self.display = Display()
         self.select_team = SelectTeam()
-        self.clock = pygame.time.Clock()
-        self.clock.tick(60)
 
 
     def run_sim(self):
         """
             Simulator game loop
         """
-        clock = pygame.time.Clock()
-        clock.tick(30)
 
     def start_scene(self):
         # main menu audio

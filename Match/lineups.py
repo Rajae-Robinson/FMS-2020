@@ -1,15 +1,26 @@
-class Lineups(Players):
+import pygame, sys
+from pygame.locals import *
+
+from Display.display import Display
+#from game import Game
+
+class Lineups():
+    def __init__(self, home, away):
+        self.display = Display()
+        self.home = home
+        self.away = away
+
     def display_players(self):
         # lineup boxs image
-        lineup_box = pygame.image.load("assets/sprites/lineup.png").convert()
+        lineup_box = pygame.image.load("assets/sprites/Backgrounds/lineup.png").convert()
 
         # Box for home team
-        win.blit(lineup_box, (20, 20))
+        self.display.draw_image(lineup_box, (20, 20))
         # Box for away team 
-        win.blit(lineup_box, (600, 20))
+        self.display.draw_image(lineup_box, (600, 20))
 
-        home_team = self.home_team
-        away_team = self.away_team
+        home_team = self.home
+        away_team = self.away
 
         # vars to postion text
         # home and away team
@@ -20,30 +31,33 @@ class Lineups(Players):
         SPACE = 40
 
         # Displaying home team name
-        display_text(win, home_team[0], font_small, WHITE, (22, 22))
+        self.display.display_text(home_team[0], self.display.font_small, (22, 22))
         # Display names of players on home team
         for i in range(1, 12):
             hy += SPACE
-            display_text(win, home_team[i], font_extra_small, WHITE, (22, hy))
+            self.display.display_text(home_team[i], self.display.font_extra_small, (22, hy))
             
         # Displaying away team name
-        display_text(win, away_team[0], font_small, WHITE, (602, 22))
+        display_text(away_team[0], self.display.font_small, (602, 22))
         # Display names of players on away team
         for i in range(1, 12):
             ay += SPACE
-            display_text(win, away_team[i], font_extra_small, WHITE, (602, ay))
+            self.display.display_text(away_team[i], self.display.font_extra_small, (602, ay))
             
 
     def display_lineups(self):
         # menu audio
+        pygame.mixer.music.stop() # stopping main menu audio before playing
         pygame.mixer.music.load("assets/audio/match/lineup.wav")
         pygame.mixer.music.play(-1)
 
+        #loading background
+        field_bkg = pygame.image.load("assets/sprites/Backgrounds/play-screen.png").convert()
+
         while True:
-            win.fill(BLACK)
-            display_background(field_bkg)
+            self.display.display_background(field_bkg)
             self.display_players()
-            display_text(win, "Press Spacebar to continue", font_small, WHITE, (400, -5))
+            self.display.display_text("Press Spacebar to continue", self.display.font_small, (400, -5))
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -52,7 +66,6 @@ class Lineups(Players):
                 # if users presses spacebar start simulator
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
-                        Engine().game()
+                        # run sims
+                        print("Working")
 
-            pygame.display.update()
-            clock.tick(FPS)

@@ -1,9 +1,9 @@
 import pygame, sys
 from pygame.locals import *
+
 from Display.display import Display
 from Menus.button import Button
-
-background = pygame.image.load("assets/sprites/Backgrounds/background.png").convert()
+from Match.lineups import Lineups
 
 class SelectTeam:
     # class variables for the team lists
@@ -18,6 +18,9 @@ class SelectTeam:
 
     def __init__(self):
         self.display = Display()
+        self.background = pygame.image.load("assets/sprites/Backgrounds/background.png").convert()
+        self.home = " "
+        self.away = " "
 
     def la_liga(self):
         self.display_in_grid(self.la_liga_team_names)
@@ -34,8 +37,11 @@ class SelectTeam:
     def serieA(self):
         self.display_in_grid(self.serieA_team_names)
 
-    # show flags for each league
-    def display_leagues(self):
+    def display_leagues(self, team):
+        """
+            Show flag buttons for each league
+        """
+
         # load the flag images
         la_liga = Button(pygame.image.load("assets/sprites/Buttons/Flags/spain.png").convert(), (100, 200), (120, 100))
         premier = Button(pygame.image.load("assets/sprites/Buttons/Flags/england.png").convert(), (240, 200), (120, 100))
@@ -43,28 +49,42 @@ class SelectTeam:
         ligue1 = Button(pygame.image.load("assets/sprites/Buttons/Flags/france.png").convert(), (520, 200), (120, 100))
         serieA = Button(pygame.image.load("assets/sprites/Buttons/Flags/italy.png").convert(), (660, 200), (120, 100))
 
-        # drawing the flags
-        la_liga.draw()
-        premier.draw()
-        bundesliga.draw()
-        ligue1.draw()
-        serieA.draw()
+        while True:
+            # displaying the background
+            self.display.display_background(self.background)
+            self.display.display_text(f"Select {team} team league: ", self.display.font_large, (100, 100))
 
-        # when flag clicked
-        for event in pygame.event.get():
-            la_liga.event_handler(event, self.la_liga)
-            bundesliga.event_handler(event, self.bundesliga)
-            premier.event_handler(event, self.premier)
-            ligue1.event_handler(event, self.ligue1)
-            serieA.event_handler(event, self.serieA)
+            # drawing the flags
+            la_liga.draw()
+            premier.draw()
+            bundesliga.draw()
+            ligue1.draw()
+            serieA.draw()
 
-    # game_com list of teams in a league
+            # when flag clicked
+            for event in pygame.event.get():
+                la_liga.event_handler(event, self.la_liga)
+                bundesliga.event_handler(event, self.bundesliga)
+                premier.event_handler(event, self.premier)
+                ligue1.event_handler(event, self.ligue1)
+                serieA.event_handler(event, self.serieA)
+
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            pygame.display.update()
+
+
     def display_in_grid(self, team_list):
-        #global home, away
+        """
+            List all of the teams in a given league
+
+        """
         text = []
 
         while True:
-            self.display.display_background(background)
+            self.display.display_background(self.background)
             COLUMN_WIDTH = 200
             ROW_WIDTH = 50
             x = 100
@@ -96,15 +116,13 @@ class SelectTeam:
                                 if tup[1].collidepoint(event.pos):
                                     if self.home_selected:
                                         # setting away team
-                                        #away = tup[0]
+                                        self.away = tup[0]
                                         # run select_random to set class vars for home and away team
-                                        Players().select_random()
-                                        Lineups().display_lineups()
-                                        #Engine().game()
+                                        Lineups(self.home, self.away).display_lineups()
                                     else:
                                         # setting home team
                                         self.home_selected = True
-                                        #home = tup[0]
+                                        self.home = tup[0]
                                         self.select_away()
             
                 if event.type == QUIT:
@@ -115,24 +133,12 @@ class SelectTeam:
 
     # select home team
     def select_home(self):
-        while True:
-            self.display.display_background(background)
-            self.display.display_text("Select home team league: ", self.display.font_large, (100, 100))
-            self.display_leagues()
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                        pygame.quit()
-                        sys.exit()
-            pygame.display.update()
+        self.display_leagues("home")
+            
 
     # select away team
     def select_away(self):
-        while True:
-            self.display.display_background(background)
-            self.display.display_text("Select away team league: ", self.display.font_large, (100, 100))
-            self.display_leagues()
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                        pygame.quit()
-                        sys.exit()
-            pygame.display.update()
+        self.display_leagues("away")
+            
+            
+
