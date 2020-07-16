@@ -1,9 +1,24 @@
-class Chances(Players):
+class Score:
+    home_goals = 0
+    away_goals = 0
+
+    # takes team who scored and player who scored
+    def increase_score(self, team, player):
+        # if player is on home team
+        if team[0] in self.home_team:
+            if player in self.home_team:
+                self.home_goals += 1
+
+        # if player is on away team
+        if team[0] in self.away_team:
+            if player in self.away_team:
+                self.away_goals += 1
+
+
+class Chances(Score):
     # SHOTS
     # play goal audio, crowd should be louder after goal and show image
     def goal(self, team, player):
-        global goal_scored
-
         Players().increase_score(team, player)
         goal_scored = True
 
@@ -247,7 +262,7 @@ class Chances(Players):
         else:
             self.dribble()
 
-class Foul(Players):
+class Foul(Score):
     # substitute player if injured
     def injury(self):
         player_index = 0

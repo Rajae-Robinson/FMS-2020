@@ -2,13 +2,12 @@ import pygame, sys
 from pygame.locals import *
 
 from Display.display import Display
-#from game import Game
-
+          
 class Lineups():
-    def __init__(self, home, away):
+    def __init__(self, home_team, away_team):
         self.display = Display()
-        self.home = home
-        self.away = away
+        self.home_team = home_team
+        self.away_team = away_team
 
     def display_players(self):
         # lineup boxs image
@@ -19,8 +18,8 @@ class Lineups():
         # Box for away team 
         self.display.draw_image(lineup_box, (600, 20))
 
-        home_team = self.home
-        away_team = self.away
+        home_team = self.home_team
+        away_team = self.away_team
 
         # vars to postion text
         # home and away team
@@ -38,7 +37,7 @@ class Lineups():
             self.display.display_text(home_team[i], self.display.font_extra_small, (22, hy))
             
         # Displaying away team name
-        display_text(away_team[0], self.display.font_small, (602, 22))
+        self.display.display_text(away_team[0], self.display.font_small, (602, 22))
         # Display names of players on away team
         for i in range(1, 12):
             ay += SPACE
@@ -67,5 +66,6 @@ class Lineups():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         # run sims
-                        print("Working")
-
+                        from Match.game import Game
+                        Game().run_sim()
+            pygame.display.update()
