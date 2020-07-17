@@ -49,7 +49,7 @@ class SelectTeam:
                    "Timor", "Djene", "Cabaco", "D. Soria", "Duro", "F. Portillo", "A. Ndiaye", "N/A",
                    "N/A", "N/A"],
 
-                     ["SEVILLA", "L. de Jong", "El Haddadi", "Torres", "Jordan", "Fernando R.", "Banega", "Marcelo",
+                     ["SEVILLA", "L. de Jong", "El Haddadi", "Torres", "Jordan", "Fernando R.", "Banega", "Navas",
                    "Kounde", "Diego Carlos", "S. Reguilon", "T. Vaclik", "Y. En-Nesyri", "Suso", "Sergi Gomez", "N/A",
                    "N/A", "N/A"]
                    ]
@@ -275,14 +275,14 @@ class SelectTeam:
                                 if tup[1].collidepoint(event.pos):
                                     if self.home_selected:
                                         # setting away team
-                                        self.away = tup[0]
-                                        self.away_team = self.teams_dict[self.away]
-                                        Lineups(self.home_team, self.away_team).display_lineups()
+                                        SelectTeam.away = tup[0]
+                                        SelectTeam.away_team = self.teams_dict[SelectTeam.away]
+                                        Lineups(SelectTeam.home_team, SelectTeam.away_team).display_lineups()
                                     else:
                                         # setting home team
                                         self.home_selected = True
-                                        self.home = tup[0]
-                                        self.home_team = self.teams_dict[self.home]
+                                        SelectTeam.home = tup[0]
+                                        SelectTeam.home_team = self.teams_dict[SelectTeam.home]
                                         self.select_away()
             
                 if event.type == QUIT:

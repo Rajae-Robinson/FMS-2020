@@ -1,4 +1,5 @@
 import pygame
+import time
 pygame.init()
 
 # Setting height and width of screen
@@ -12,9 +13,13 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
+# Vars to position text
+CENTER = (410, 300)
+TO_LEFT = (100, 300)
+
 class Display:
     """
-        Handles displaying images and text to screen
+        Creates window and handles displaying images and text to screen
 
     """
 
@@ -47,26 +52,29 @@ class Display:
         """
         self.win.blit(image, position)
 
-    """
-    # game commentary function displays text then sleeps
-    def game_com(self, surface, text, font, color, position):
-        playersobj = Players()
-        engineobj = Engine()
-        score = "{} {}-{} {}".format(playersobj.home_team[0], playersobj.home_goals, playersobj.away_goals, playersobj.away_team[0])
+    
+    def game_com(self, text, font):
+        """
+                game commentary function displays text then sleeps
+        """
+        from Match.match_variables import MatchVariables
+        from Menus.select_team import SelectTeam
+        self.match_vars = MatchVariables()
+        self.select_team = SelectTeam()
+        score = "{} {}-{} {}".format(self.select_team.home_team[0], self.match_vars.home_goals, self.match_vars.away_goals, self.select_team.away_team[0])
 
-        self.win.fill(BLACK)
-        display_background(field_bkg)
+        # loading the background image
+        field_bkg = pygame.image.load("assets/sprites/Backgrounds/play-screen.png").convert()
+        self.display_background(field_bkg)
 
         # display scores
-        display_text(self.win, score, font_large, WHITE, (280, 220))
+        self.display_text(score, self.font_large, (280, 220))
 
         # display commentary
-        display_text(surface, text, font, color, position)
+        self.display_text(text, font, TO_LEFT)
 
         # display minutes
-        display_text(self.win, f"{engineobj.mins} minutes", font_large, WHITE, (410, 350))
+        self.display_text(f"{self.match_vars.mins} minutes", self.font_large, (410, 350))
         pygame.display.update()
         # time given to read commentary
-        sleep(2)
-
-    """
+        time.sleep(2)
