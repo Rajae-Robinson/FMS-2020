@@ -10,8 +10,8 @@ class SelectTeam:
     la_liga_team_names = ["REAL MADRID", "BARCELONA", "ATLETICO MADRID", "SEVILLA", "VALENCIA", "GETAFE"]
     bundesliga_team_names = ["BAYERN MUNICH", "DORTMUND", "RP LIEPZIG", "LEVERKUSEN", "WOLFSBURG", "FRANKFURT"]
     premier_team_names = ["MAN. CITY", "LIVERPOOL", "CHELSEA", "TOTTENHAM", "ARSENAL", "MAN. UNITED"]
-    ligue1_team_names = ["PSG", "MARSEILLE", "LYON", "LILLE", "NICE", "MONACO"]
-    serieA_team_names = ["JUVENTUS", "INTER MILAN", "AS MILAN", "ROMA", "NAPOLI", "LAZIO"]
+    ligue1_team_names = ["PSG"]
+    serieA_team_names = ["JUVENTUS", "INTER MILAN", "AC MILAN", "AS ROMA", "NAPOLI", "LAZIO"]
 
     # is both a home and away team selected
     home_selected = False
@@ -54,28 +54,28 @@ class SelectTeam:
                    "N/A", "N/A"]
                    ]
 
-    serieA_teams = [["AS MILAN", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+    serieA_teams = [["AC MILAN", "H. Calhanoglu", "Z. Ibrahimovic", "A. Rebic", "F. Kessie", "L. Biglia", "G. Bonaventura", "T. Hernandez",
+                   "M. Musacchio", "A. Romagnoli", "A. Conti", "G. Donnarumma", "S. Castillejo", "R. Krunic", "L. Duarte", "M/A",
+                   "N/A", "Z. Ibrahimovic"],
 
-                    ["INTER MILAN", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["INTER MILAN", "L. Martinez", "R. Lukaku", "A. Sanchez", "A. Candreva", "C. Eriksen", "M. Vecino", "D. Godin",
+                   "M. Skriniar", "S. de Vrij", "D. D'Ambrosio", "S. Handovic", "M. Brozovic", "N. Barella", "A. Bastoni", "N/A",
+                   "N/A", "R. Lukaku"],
 
-                    ["JUVENTUS", "Cristiano Ronaldo", "M. Mandzukic", "P. Dybala", "B. Matuidi", "Arthur", "S. Khedira",
-                   "A. Sandro", "Chiellini", "Bonucci", "De Sciglio", "W. Szczesny", "Barzagli", "Cancelo", "R. Bentacur",
+                    ["JUVENTUS", "Cristiano Ronaldo", "Higuain", "P. Dybala", "B. Matuidi", "R. Bentacur", "A. Ramsey",
+                   "A. Sandro", "Chiellini", "Bonucci", "Danilo", "W. Szczesny", "Douglas Costa", "M. De Ligt", "Arthur",
                    "Cristiano Ronaldo", "P. Dybala", "Cristiano Ronaldo"], 
 
-                    ["NAPOLI", "D. Mertens", "Insigne", "Callejon", "F. Ruiz", "Hamsik", "Allan", "Mario Rui", "K. Koulibaly",
-                   "Albiol", "Maksimovic", "D. Ospina", "A. Milik", "Hysaj", "A. Diawara", "Hamsik", "Allan", "D. Mertens"],
+                    ["NAPOLI", "D. Mertens", "K. Insigne", "H. Lozano", "F. Ruiz", "P. Zielinski", "Allan", "Mario Rui", "K. Koulibaly",
+                   "Albiol", "Manolas", "D. Ospina", "A. Milik", "Hysaj", "Callejon", "N/A", "Allan", "D. Mertens"],
 
-                    ["AS ROMA", "J. Kluivert", "Dzeko", "Schick", "Under", "S. N'Zonzi", "Florenzi", "A. Kolarov", "F. Fazio",
-                   "Manolas", "Santon", "R. Olsen", "Pastore", "Perotti", "B. Cristante", "A. Kolarov", "A. Kolarov",
+                    ["AS ROMA", "J. Kluivert", "Dzeko", "Schick", "Under", "N. Zaniolo", "Florenzi", "A. Kolarov", "F. Fazio",
+                   "C. Smalling", "Santon", "R. Olsen", "Pastore", "Perotti", "N. Kalinic", "A. Kolarov", "A. Kolarov",
                    "A. Kolarov"],
 
-                    ["LAZIO", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"]]
+                    ["LAZIO", "F. Caicedo", "C. Immobile", "J. Correa", "Luis Alberto", "S. Milinkovic-Savic", "Jony", "J. Lukaku",
+                   "L. Felipe", "F. Acerbi", "Radu", "T. Strakosha", "L. Leiva", "M. Parolo", "M. Lazzari", "N/A",
+                   "N/A", "C. Immobile"]]
 
     bundesliga_teams = [["BAYERN MUNICH", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
                    "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
@@ -103,51 +103,31 @@ class SelectTeam:
 
     ligue1_teams = [["PSG", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
                    "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
-
-                    ["MARSEILLE", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
-
-                    ["LILLE", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
-
-                    ["NICE", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
-
-                    ["LYON", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
-
-                    ["MONACO", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
                    "L. Modric", "S. Ramos"]]
 
-    premier_teams = [["MAN. CITY", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+    premier_teams = [["MAN. CITY", "R. Sterling", "S. Aguero", "R. Mahrez", "B. Silva", "Fernandinho", "K. De Bruyne", "B. Mendy",
+                   "N. Otamendi", "A. Laporte", "K. Walker", "Ederson", "D. Silva", "O. Zinchenko", "Rodri", "K. De Bruyne",
+                   "K. De Bruyne", "S. Aguero"],
 
-                    ["MAN. UNITED", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["MAN. UNITED", "A. Martial", "M. Rashford", "D. James", "B. Fernandes", "P. Pogba", "S. McTominay", "L. Shaw",
+                   "E. Bailly", "V. Lindelof", "A. Wan-Bissaka", "D. De Gea", "Fred", "J. Mata", "M. Rojo", "M. Rashford",
+                   "P. Pogba", "M. Rashford"],
 
-                    ["LIVERPOOL", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["LIVERPOOL", "S. Mane", "R. Firmino", "M. Salah", "J. Milner", "Fabinho", "J. Henderson", "Robertson",
+                   "J. Matip", "V. Van Dijk", "T. Alexander-Arnold", "Alisson", "J. Gomez", "G. Wijnaldum", "D. Origi", "R. Firminho",
+                   "J. Milner", "J. Milner"],
 
-                    ["ARSENAL", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["ARSENAL", "N. Pepe", "P. Aubameyang", "A. Lacazette", "M. Ozil", "D. Ceballos", "M. Guendouzi", "S. Kolasinac",
+                   "D. Luiz", "Sokratis", "H. Bellerin", "B. Leno", "L. Torreira", "E. Nketiah", "S. Mustafi", "P. Aubamenyang",
+                   "M. Ozil", "P. Aubameyang"],
 
-                    ["CHELSEA", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["CHELSEA", "C. Pulisic", "T. Abraham", "H. Ziyech", "M. Kovacic", "N. Kante", "Jorginho", "Emerson",
+                   "K. Zouma", "A. Rudiger", "C. Azpilicueta", "Kepa", "Willian", "Pedro", "M. Alonso", "N/A",
+                   "N. Kante", "Jorginho"],
 
-                    ["TOTTENHAM", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"]]
+                    ["TOTTENHAM", "H. Son", "H. Kane", "L. Moura", "D. Alli", "G. Lo Ceslo", "M. Sissoko", "B. Davis",
+                   "T. Alderweireld", "J. Vertonghen", "S. Aurier", "H. LLoris", "E. Lamela", "H. Winks", "T. Ndombele", "N/A",
+                   "N/A", "H. Kane"]]
 
     teams_dict = {}
 
@@ -164,8 +144,9 @@ class SelectTeam:
             if serieA_teams[i][0] == team:
                 teams_dict[team] = serieA_teams[i]
 
-            if ligue1_teams[i][0] == team:
-                teams_dict[team] = ligue1_teams[i]
+            # only one team P.S.G
+            if ligue1_teams[0][0] == team:
+                teams_dict[team] = ligue1_teams[0]
 
             if premier_teams[i][0] == team:
                 teams_dict[team] = premier_teams[i]

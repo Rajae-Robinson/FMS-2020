@@ -31,33 +31,24 @@ class Game:
 
         while self.match_vars.mins <= 90:    
             rand_events = random.randint(1, 10)
-
-            playersobj = Players()
             
             if self.match_vars.mins == 1:
                 self.display.game_com("Kick Off", self.display.font_large)
                 pygame.mixer.Sound('assets/audio/match/whistle.wav').play()
                 time.sleep(3)
-
             if self.match_vars.mins == 45:
                 self.display.game_com("Half Time", self.display.font_large)
                 pygame.mixer.Sound('assets/audio/match/whistle.wav').play()
-                time.sleep(3)
-
-            if self.match_vars.mins == 90:
-                self.display.game_com("Full Time", self.display.font_large)
+                time.sleep(5)
                 pygame.mixer.Sound('assets/audio/match/whistle.wav').play()
-                time.sleep(3)
-            
-            if rand_events == 1:
+
+
+            if rand_events == 1 or rand_events == 2:
                 Chances().play()
-                self.match_vars.update_mins()
-            elif rand_events == 5:
+            elif rand_events == 5 or rand_events == 6:
                 Foul().play()
-                self.match_vars.update_mins()
             else:
                 Chances().idle()
-                self.match_vars.update_mins()
             
             self.match_vars.update_mins()
 
@@ -65,3 +56,7 @@ class Game:
                 if event.type == QUIT:
                         pygame.quit()
                         sys.exit()
+
+        self.display.game_com("Full Time", self.display.font_large)
+        pygame.mixer.Sound('assets/audio/match/whistle.wav').play()
+        time.sleep(3)

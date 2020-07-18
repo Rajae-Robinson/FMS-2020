@@ -5,7 +5,7 @@ pygame.init()
 # Setting display caption
 pygame.display.set_caption("SMS 2020")
 
-def main():
+def start_scene():
     """
        Runs the start screen 
     """
@@ -39,5 +39,8 @@ def main():
                     
         pygame.display.update()
 
+def main():
+    start_scene()
+    
 if __name__ == "__main__":
     main()

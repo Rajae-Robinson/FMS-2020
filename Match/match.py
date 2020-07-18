@@ -23,10 +23,10 @@ class Players:
         self.attacking_team = random.choice([self.home_team, self.away_team])
 
         # Figuring out which team is not in possession
-        if self.attacking_team == self.select_team.home_team:
-            self.opposing_team = self.select_team.away_team
+        if self.attacking_team == self.home_team:
+            self.opposing_team = self.away_team
         else:
-            self.opposing_team = self.select_team.home_team
+            self.opposing_team = self.home_team
 
         # setting the first elevens for both attacking and opposing teams
         self.atkfirst_eleven = self.attacking_team[1:12]
@@ -45,14 +45,22 @@ class Players:
             self.player = random.choice(self.position)
 
         # Set-piece takers
-        # Checking if the setpiece taker is on the field
-        if self.player in self.atkfirst_eleven:
+
+        # Checking if the setpiece taker was set
+        # freekick
+        if self.attacking_team[15] != "N/A":
             self.fk_taker = self.attacking_team[15]
-            self.ck_taker = self.attacking_team[16]
-            self.pk_taker = self.attacking_team[17]
         else:
             self.fk_taker = random.choice(self.attackers)
+        # corner kick
+        if self.attacking_team[16] != "N/A":
+            self.ck_taker = self.attacking_team[16]
+        else:
             self.ck_taker = random.choice(self.midfielders)
+        # penalty
+        if self.attacking_team[17] != "N/A":
+            self.pk_taker = self.attacking_team[17]
+        else:
             self.pk_taker = random.choice(self.attackers)
 
         # selecting a defender and the goalkeeper of the defending team
@@ -159,26 +167,32 @@ class Chances(Players):
 
     # DRIBBLE
     def dribble(self):
-        event = random.randint(1, 10)
+        event = random.randint(1, 2)
         is_pass = random.randint(1, 2)
 
         self.display.game_com(f"{self.player} dribbles with the ball...", self.display.font_small)
 
-        if event >= 1 and event <= 5:
+        if event == 1:
             self.display.game_com("Then, he attempts to pass to his teammate.", self.display.font_small)
             if is_pass:
                 self.pass_ball()
             else:
                 self.display.game_com(f"{self.defender} intercepts the ball", self.display.font_small)
-        elif event >= 6 or event <= 8:
+        else:
             #solo-goal
             self.display.game_com(f"{self.player} takes it pass the defender. He's in the box!", self.display.font_small)
             self.shoot(self.player)
-        else:
-            Foul().play()
 
     # SETPIECES
-    def freekick(self):
+    def freekick(self, team, set_piece_taker):
+        """
+            This is done so python doesn't call Players
+            init method again when it cannot find the variables
+            thus creating a new random value
+        """
+        self.attacking_team = team
+        self.fk_taker = set_piece_taker
+
         pass_or_shoot = random.randint(1, 2)
         self.display.game_com(f"{self.attacking_team[0]} gets a freekick. {self.fk_taker} stands over it.", 
                 self.display.font_small)
@@ -188,7 +202,7 @@ class Chances(Players):
             head = random.randint(1, 2)
             headed_goal = random.randint(1, 2)
             # any player except the goalkeeper is in the box
-            box = self.atkfirst_eleven[:10]
+            box = self.attacking_team[1:10]
 
             # freekick taker is in box remove him
             if self.fk_taker in box:
@@ -227,10 +241,13 @@ class Chances(Players):
                 self.display.game_com("It goes over the bar! Great Effort.",
                          self.display.font_small)
 
-    def penalty(self):
+    def penalty(self, team, set_piece_taker, gk):
+        self.attacking_team = team
+        self.pk_taker = set_piece_taker
+        self.gk = gk
         score = random.randint(1, 2)
         miss = random.choice(["{} misses!".format(self.pk_taker), 
-                "{} saves!{}".format(self.gk, self.pk_taker)])
+                "{} saves!".format(self.gk)])
 
         self.display.game_com("The referee points to the spot!", 
                 self.display.font_small)
@@ -242,7 +259,7 @@ class Chances(Players):
                 self.display.font_small)
         self.display.game_com("He shoots!", self.display.font_small)
 
-        if score:
+        if score == 1:
             self.goal(self.attacking_team, self.pk_taker)
         else:
             self.miss()
@@ -333,6 +350,7 @@ class Foul(Players):
     def __init__(self):
         super().__init__()
         self.display = Display()
+
     # substitute player if injured
     def injury(self):
         player_index = 0
@@ -377,27 +395,47 @@ class Foul(Players):
     
         # removing defender from team
         self.opposing_team[player_index] = None
+        # checking if is name was set as a set-piece taker
+        # freekick
+        if self.defender == self.opposing_team[15]:
+            self.opposing_team[15] = "N/A"
+        # corner
+        if self.defender == self.opposing_team[16]:
+            self.opposing_team[16] = "N/A"
+        # pk
+        if self.defender == self.opposing_team[17]:
+            self.opposing_team[17]
 
         if injury == 1:
             self.injury()
+
+    def yellow_card(self):
+        global yellow
+        self.display.game_com("Yellow card!", self.display.font_small)
+
+        # if player already recieved yellow he should recieve a red card
+        if self.defender in yellow:
+            self.display.game_com("It's his second yellow!", self.display.font_small)
+            self.red_card()
+            #Chances().freekick(self.attacking_team, self.fk_taker)
+        else:
+            self.display.game_com(f"{self.defender} will have to be careful now.", self.display.font_small)
+        yellow.append(self.defender)     
 
     def play(self):
         event = random.randint(1, 10)
         in_box = random.randint(1, 10)
 
-        # 10% chance player is tripped in box
-        if in_box == 1:
+        # 0% chance player is tripped in box
+        if in_box == 10:
             self.display.game_com(f"{self.defender} trips {self.player} in the box!", 
                     self.display.font_small)
-            # 50% chance a yellow is given
-            if event <= 5:
-                self.display.game_com(f"{self.defender} receives a yellow card!", 
-                        self.display.font_small)
-                yellow.append(self.defender)
-            # 50% chance red is given
+            # 50-50 chance of a yellow or red
+            if event == 1:
+                self.yellow_card()
             else:
                 self.red_card()
-            Chances().penalty()
+            Chances().penalty(self.attacking_team, self.pk_taker, self.gk)
 
         # 90% chance player is fouled outside of the box
         else:
@@ -410,22 +448,13 @@ class Foul(Players):
             if event < 5:
                 self.display.game_com(f"The referee gives {self.defender} a warning.", 
                         self.display.font_small)
-                Chances().freekick()
+                Chances().freekick(self.attacking_team, self.fk_taker)
                 
             # 50% chance player recieves a yellow card
             elif event >= 5 and event < 10:
-                self.display.game_com("Yellow card!", self.display.font_small)
-                yellow.append(self.player)
-
-                # if player already recieved yellow he should recieve a yellow card
-                if self.defender in yellow:
-                    self.display.game_com("It's his second yellow!", self.display.font_small)
-                    self.red_card()
-                    Chances().freekick()
-                else:
-                    self.display.game_com(f"{self.defender} will have to be careful now.", self.display.font_small)
-                    Chances().freekick()
+                    self.yellow_card()
+                    Chances().freekick(self.attacking_team, self.fk_taker)
             # 10% chance player recieves a red
             else:
                 self.red_card()
-                Chances().freekick()
+                Chances().freekick(self.attacking_team, self.fk_taker)

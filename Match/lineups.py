@@ -52,8 +52,8 @@ class Lineups():
 
         #loading background
         field_bkg = pygame.image.load("assets/sprites/Backgrounds/play-screen.png").convert()
-
-        while True:
+        run = True
+        while run:
             self.display.display_background(field_bkg)
             self.display_players()
             self.display.display_text("Press Spacebar to continue", self.display.font_small, (400, -5))
@@ -68,4 +68,6 @@ class Lineups():
                         # run sims
                         from Match.game import Game
                         Game().run_sim()
+                        self.display.scoresheet()
+                        run = False
             pygame.display.update()
