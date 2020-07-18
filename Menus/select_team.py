@@ -38,8 +38,8 @@ class SelectTeam:
                    "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
                    "L. Modric", "S. Ramos"],
 
-                     ["BARCELONA", "L. Messi", "L. Suarez", "A. Griezmann", "P. Coutinho", "S. Busquets", "Vidal", "N. Semedo",
-                    "Umtiti", "Pique", "J. Alba", "M. ter Stegen", "Pjanic", "O. Dembele", "Sergio Roberto", "L. Messi",
+                     ["BARCELONA", "L. Messi", "L. Suarez", "A. Griezmann", "F. De Jong", "S. Busquets", "Vidal", "N. Semedo",
+                    "Umtiti", "Pique", "J. Alba", "M. ter Stegen", "Pjanic", "O. Dembele", "A. Fati", "L. Messi",
                     "L. Messi", "L. Suarez"],
 
                      ["ATLETICO MADRID", "J. Felix", "Morata", "Saul", "T. Lemar", "Correa", "Koke", "Lodi",
