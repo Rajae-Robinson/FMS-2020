@@ -34,14 +34,14 @@ class Lineups():
         # Display names of players on home team
         for i in range(1, 12):
             hy += SPACE
-            self.display.display_text(home_team[i], self.display.font_extra_small, (22, hy))
+            self.display.display_text(home_team[i], self.display.font_small, (22, hy))
             
         # Displaying away team name
         self.display.display_text(away_team[0], self.display.font_small, (602, 22))
         # Display names of players on away team
         for i in range(1, 12):
             ay += SPACE
-            self.display.display_text(away_team[i], self.display.font_extra_small, (602, ay))
+            self.display.display_text(away_team[i], self.display.font_small, (602, ay))
             
 
     def display_lineups(self):

@@ -5,10 +5,14 @@ from Display.display import Display
 from Menus.button import Button
 from Match.lineups import Lineups
 
+# whether home or away screen is displaying
+home_screen = False
+away_screen = False
+
 class SelectTeam:
     # class variables for the team lists
     la_liga_team_names = ["REAL MADRID", "BARCELONA", "ATLETICO MADRID", "SEVILLA", "VALENCIA", "GETAFE"]
-    bundesliga_team_names = ["BAYERN MUNICH", "DORTMUND", "RP LIEPZIG", "LEVERKUSEN", "WOLFSBURG", "FRANKFURT"]
+    bundesliga_team_names = ["BAYERN MUNICH", "DORTMUND", "RB LIEPZIG", "LEVERKUSEN", "WOLFSBURG", "FRANKFURT"]
     premier_team_names = ["MAN. CITY", "LIVERPOOL", "CHELSEA", "TOTTENHAM", "ARSENAL", "MAN. UNITED"]
     ligue1_team_names = ["PSG"]
     serieA_team_names = ["JUVENTUS", "INTER MILAN", "AC MILAN", "AS ROMA", "NAPOLI", "LAZIO"]
@@ -77,33 +81,33 @@ class SelectTeam:
                    "L. Felipe", "F. Acerbi", "Radu", "T. Strakosha", "L. Leiva", "M. Parolo", "M. Lazzari", "N/A",
                    "N/A", "C. Immobile"]]
 
-    bundesliga_teams = [["BAYERN MUNICH", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+    bundesliga_teams = [["BAYERN MUNICH", "L. Sane", "R. Lewandowski", "S. Gnabry", "P. Coutinho", "J. Martinez", "J. Kimmich", "D. Alaba",
+                   "L. Hernandez", "N. Sule", "B. Pavard", "M. Neuer", "C. Tolisso", "I. Perisic", "Thiago", "D. Alaba",
+                   "D. Alaba", "R. Lewandowski"],
 
-                    ["DORTMUND", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["DORTMUND", "T. Hazard", "E. Haaland", "J. Sancho", "M. Reus", "E. Can", "J. Brandt", "N. Schulz",
+                   "M. Hummels", "M. Akanji", "T. Meunier", "R. Burki", "A. Witsel", "T. Delaney", "R. Guerreiro", "J. Sancho",
+                   "M. Reus", "E. Haaland"],
 
-                    ["LEVERKUSEN", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["LEVERKUSEN", "L. Bailey", "K. Volland", "M. Diaby", "K. Havertz", "K. Demirbay", "E. Palacios", "Wendell",
+                   "S. Bender", "J. Tah", "M. Weiser", "L. Hradecky", "L. Alario", "Paulinho", "N. Amiri", "L. Bailey",
+                   "N/A", "K. Volland"],
 
-                    ["RP LIEPZIG", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["RB LIEPZIG", "Y. Poulsen", "J. Augustin", "H. Hwang", "D. Olmo", "K. Kampl", "M. Sabitzer", "M. Halstenberg",
+                   "W. Orban", "D. Upamecano", "B. Henrichs", "P. Gulacsi", "O. Bias", "A. Lookman", "F. Hartmann", "N/A",
+                   "N/A", "N/A"],
 
-                    ["WOLFSBURG", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"],
+                    ["WOLFSBURG", "J. Brekalo", "W. Weghorst", "R. Steffen", "Y. Gerhardt", "J. Guilavogui", "M. Arnold", "J. Roussillon",
+                   "M. Pongracic", "J. Brooks", "William", "K. Casteels", "X. Schlager", "F. Claus", "D. Ginczek", "N/A",
+                   "N/A", "W. Weghorst"],
 
-                    ["FRANKFURT", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"]]
+                    ["FRANKFURT", "B. Dost", "A. Silva", "G. Paciencia", "F. Kostic", "D. Kamada", "D. Sow", "T. Chandler",
+                   "D. Abraham", "M. Hinteregger", "E. Durm", "K. Trapp", "D. Joveljic", "M. Gacinovic", "S. Rode", "N/A",
+                   "N/A", "N/A"]]
 
-    ligue1_teams = [["PSG", "E. Hazard", "K. Benzema", "Vinicius Jr.", "T. Kroos", "Casemiro", "L. Modric", "Marcelo",
-                   "Varane", "S. Ramos", "D. Carvajal", "T. Courtois", "M. Asensio", "L. Vazquez", "G. Bale", "S. Ramos",
-                   "L. Modric", "S. Ramos"]]
+    ligue1_teams = [["PSG", "Neymar", "M. Icardi", "K. Mbappe", "A. Di Maria", "I. Gueye", "M. Veratti", "L. Kurzawa",
+                   "T. Silva", "P. Kimpembe", "T. Kehrer", "K. Navas", "E. Cavani", "J. Draxler", "P. Sarabia", "Neymar",
+                   "Neymar", "M. Icardi"]]
 
     premier_teams = [["MAN. CITY", "R. Sterling", "S. Aguero", "R. Mahrez", "B. Silva", "Fernandinho", "K. De Bruyne", "B. Mendy",
                    "N. Otamendi", "A. Laporte", "K. Walker", "Ederson", "D. Silva", "O. Zinchenko", "Rodri", "K. De Bruyne",
@@ -121,8 +125,8 @@ class SelectTeam:
                    "D. Luiz", "Sokratis", "H. Bellerin", "B. Leno", "L. Torreira", "E. Nketiah", "S. Mustafi", "P. Aubamenyang",
                    "M. Ozil", "P. Aubameyang"],
 
-                    ["CHELSEA", "C. Pulisic", "T. Abraham", "H. Ziyech", "M. Kovacic", "N. Kante", "Jorginho", "Emerson",
-                   "K. Zouma", "A. Rudiger", "C. Azpilicueta", "Kepa", "Willian", "Pedro", "M. Alonso", "N/A",
+                    ["CHELSEA", "C. Pulisic", "T. Werner", "H. Ziyech", "M. Kovacic", "N. Kante", "Jorginho", "Emerson",
+                   "K. Zouma", "A. Rudiger", "C. Azpilicueta", "Kepa", "Willian", "Pedro", "T. Abraham", "N/A",
                    "N. Kante", "Jorginho"],
 
                     ["TOTTENHAM", "H. Son", "H. Kane", "L. Moura", "D. Alli", "G. Lo Ceslo", "M. Sissoko", "B. Davis",
@@ -223,6 +227,9 @@ class SelectTeam:
         """
         text = []
 
+        # The screen that is now showing
+        team_screen = "home" if home_screen else "away" 
+
         while True:
             self.display.display_background(self.background)
             COLUMN_WIDTH = 200
@@ -246,10 +253,13 @@ class SelectTeam:
                 x += COLUMN_WIDTH
                 row += 1
                 i += 1
-            
-            # checking if they were clicked
+
+            self.display.display_text(f"Press Spacebar to return to select {team_screen} team league screen", 
+                                      self.display.font_small, (200, 500))
+
             for event in pygame.event.get():
                 for tup in text:
+                    # checking if they were clicked
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if event.button == 1:
                                 # tuple(text, text_rect)
@@ -265,7 +275,15 @@ class SelectTeam:
                                         SelectTeam.home = tup[0]
                                         SelectTeam.home_team = self.teams_dict[SelectTeam.home]
                                         self.select_away()
-            
+
+                # if spacebar is clicked return to previous menu
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        if home_screen:
+                            self.select_home()
+                        else:
+                            self.select_away()
+
                 if event.type == QUIT:
                         pygame.quit()
                         sys.exit()
@@ -274,9 +292,14 @@ class SelectTeam:
 
     # select home team
     def select_home(self):
+        global home_screen
+        home_screen = True
         self.display_leagues("home")
             
 
     # select away team
     def select_away(self):
+        global home_screen, away_screen
+        away_screen = True
+        home_screen = False
         self.display_leagues("away")

@@ -11,14 +11,9 @@ WIDTH = 1000
 
 # Setting color variables
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-BLUE = (0, 0, 255)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
 
-# Vars to position text
-CENTER = (410, 300)
-TO_LEFT = (100, 300)
+# Var to position text
+TO_LEFT = (100, 260)
 
 class Display:
     """
@@ -33,7 +28,7 @@ class Display:
         self.font_title = pygame.font.SysFont('Lato', 45)
         self.font_large = pygame.font.SysFont('Lato', 35)
         self.font_small = pygame.font.SysFont('Lato', 25)
-        self.font_extra_small = pygame.font.SysFont('Lato', 20)
+        self.font_extra_small = pygame.font.SysFont('Lato', 14)
         self.match_vars = MatchVariables()
 
     def display_background(self, image):
@@ -72,14 +67,34 @@ class Display:
         self.display_background(field_bkg)
 
         # display scores
-        self.display_text(self.score, self.font_large, (280, 220))
+        self.display_text(self.score, self.font_large, (300, 160))
 
         # display commentary
         self.display_text(text, font, TO_LEFT)
 
         # display minutes
-        self.display_text(f"{self.match_vars.mins} minutes", self.font_large, (410, 350))
+        self.display_text(f"{self.match_vars.mins} minutes", self.font_large, (410, 300))
+
+        # Displaying bookings
+        y = 400
+        SPACE = 30
+        # Red Card
+        self.display_text("Red Card(s)", self.font_small, (350, y))
+        for player in self.match_vars.red:
+            y += SPACE
+            self.display_text(player, self.font_extra_small, (350, y))
+
+
+
+        y = 400
+        # Yellow Card
+        self.display_text("Yellow Card(s)", self.font_small, (500, y))
+        for player in self.match_vars.yellow:
+            y += SPACE
+            self.display_text(player, self.font_extra_small, (500, y))
+
         pygame.display.update()
+
         # time given to read commentary
         time.sleep(2)
 
@@ -97,24 +112,16 @@ class Display:
             y = 310
             # Displaying home team scorers to the left of win
             for scorer in self.match_vars.home_scorers:
-                # if list is empty; empty sequences are false
-                if not self.match_vars.home_scorers:
-                    self.display_text("No Scorer", self.font_small, (310, y))
-                else:
-                    self.display_text(f"{scorer[0]} {scorer[1]}'", self.font_small, (310, y))
-                    y += SPACE
+                self.display_text(f"{scorer[0]} {scorer[1]}'", self.font_small, (310, y))
+                y += SPACE
 
             # resetting white's original position
             y = 310
 
             # Displaying away team scorers to the right of win
             for scorer in self.match_vars.away_scorers:
-                # if list is empty
-                if not self.match_vars.away_scorers:
-                    self.display_text("No Scorer", self.font_small, (580, y))
-                else:
-                    self.display_text(f"{scorer[0]} {scorer[1]}'", self.font_small, (580, y))
-                    y += SPACE
+                self.display_text(f"{scorer[0]} {scorer[1]}'", self.font_small, (580, y))
+                y += SPACE
 
             for event in pygame.event.get():
                 if event.type == QUIT:

@@ -1,9 +1,14 @@
 class MatchVariables:
     home_goals = 0
     away_goals = 0
-    mins = 1
     home_scorers = []
     away_scorers = []
+
+    mins = 1
+
+    # bookings
+    red = []
+    yellow = []
 
     # takes team who scored and player who scored
     def increase_score(self, team, player):

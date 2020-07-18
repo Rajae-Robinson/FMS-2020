@@ -5,9 +5,6 @@ from Display.display import Display
 from Menus.select_team import SelectTeam
 from Match.match_variables import MatchVariables
 
-# player who recieved yellow
-yellow = []
-
 goal_img = pygame.image.load("assets/sprites/Match/goal.jpg").convert()
 
 class Players:
@@ -350,6 +347,7 @@ class Foul(Players):
     def __init__(self):
         super().__init__()
         self.display = Display()
+        self.match_vars = MatchVariables()
 
     # substitute player if injured
     def injury(self):
@@ -388,6 +386,13 @@ class Foul(Players):
         self.display.game_com(f"Red Card! {self.defender} receives a red card for his nasty tackle on {self.player}", 
                 self.display.font_small)
 
+        # adding to list of players who received a red
+        self.match_vars.red.append(self.defender)
+
+        # Checking if player recieved a yellow before and removing him from yellow
+        if self.defender in self.match_vars.yellow:
+            self.match_vars.yellow.remove(self.defender)
+
         # getting the defender's index
         for i in range(1, 11):
             if self.opposing_team[i] == self.defender:
@@ -410,17 +415,18 @@ class Foul(Players):
             self.injury()
 
     def yellow_card(self):
-        global yellow
         self.display.game_com("Yellow card!", self.display.font_small)
 
         # if player already recieved yellow he should recieve a red card
-        if self.defender in yellow:
+        if self.defender in self.match_vars.yellow:
             self.display.game_com("It's his second yellow!", self.display.font_small)
+            self.match_vars.yellow.remove(self.defender)
             self.red_card()
-            #Chances().freekick(self.attacking_team, self.fk_taker)
+            Chances().freekick(self.attacking_team, self.fk_taker)
         else:
+            self.match_vars.yellow.append(self.defender)
             self.display.game_com(f"{self.defender} will have to be careful now.", self.display.font_small)
-        yellow.append(self.defender)     
+            
 
     def play(self):
         event = random.randint(1, 10)
